@@ -29,9 +29,9 @@ function ProductsContent() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Products</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Collection</h1>
         <p className="text-gray-600 text-lg">
-          Explore our complete collection of premium lip art products
+          Explore exquisite handcrafted Lippan Art wall hangings inspired by traditional Kutch mirror work
         </p>
       </div>
 
@@ -41,11 +41,11 @@ function ProductsContent() {
             onClick={() => setSelectedCategory('all')}
             className={`px-6 py-2 rounded-full font-medium transition-all ${
               selectedCategory === 'all'
-                ? 'bg-primary-500 text-white shadow-md'
-                : 'bg-white text-gray-700 hover:bg-gray-100'
+                ? 'bg-terracotta-500 text-white shadow-md'
+                : 'bg-white text-gray-700 hover:bg-beige-100 border border-beige-300'
             }`}
           >
-            All Products
+            All Artworks
           </button>
           {categories.map((category) => (
             <button
@@ -53,8 +53,8 @@ function ProductsContent() {
               onClick={() => setSelectedCategory(category.id)}
               className={`px-6 py-2 rounded-full font-medium transition-all ${
                 selectedCategory === category.id
-                  ? 'bg-primary-500 text-white shadow-md'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  ? 'bg-terracotta-500 text-white shadow-md'
+                  : 'bg-white text-gray-700 hover:bg-beige-100 border border-beige-300'
               }`}
             >
               {category.name}
@@ -64,7 +64,7 @@ function ProductsContent() {
       </div>
 
       <div className="mb-6 text-center text-gray-600">
-        Showing {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
+        Showing {filteredProducts.length} {filteredProducts.length === 1 ? 'artwork' : 'artworks'}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -75,7 +75,7 @@ function ProductsContent() {
 
       {filteredProducts.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">No products found in this category.</p>
+          <p className="text-gray-500 text-lg">No artworks found in this category.</p>
         </div>
       )}
     </div>

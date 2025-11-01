@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { products } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import { ArtSize } from '@/types/product';
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -12,7 +13,7 @@ export default function ProductDetailPage() {
   const { addToCart } = useCart();
   
   const product = products.find(p => p.id === params.id);
-  const [selectedColor, setSelectedColor] = useState<string>(product?.colors?.[0] || '');
+  const [selectedSize, setSelectedSize] = useState<ArtSize | undefined>(product?.sizes?.[0]);
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -22,9 +23,9 @@ export default function ProductDetailPage() {
         <h1 className="text-2xl font-bold text-gray-900 mb-4">Product not found</h1>
         <button
           onClick={() => router.push('/products')}
-          className="text-primary-600 hover:text-primary-700"
+          className="text-terracotta-600 hover:text-terracotta-700"
         >
-          Back to Products
+          Back to Collection
         </button>
       </div>
     );
@@ -32,7 +33,7 @@ export default function ProductDetailPage() {
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
-      addToCart(product, selectedColor);
+      addToCart(product, selectedSize);
     }
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2000);
@@ -66,7 +67,7 @@ export default function ProductDetailPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">{product.name}</h1>
           
           <div className="flex items-center gap-4 mb-6">
-            <span className="text-3xl font-bold text-primary-600">
+            <span className="text-3xl font-bold text-terracotta-600">
               ${product.price.toFixed(2)}
             </span>
             <span className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -82,23 +83,23 @@ export default function ProductDetailPage() {
             {product.description}
           </p>
 
-          {product.colors && product.colors.length > 0 && (
+          {product.sizes && product.sizes.length > 0 && (
             <div className="mb-8">
               <label className="block text-sm font-semibold text-gray-900 mb-3">
-                Select Color: {selectedColor}
+                Select Size: {selectedSize}&quot;
               </label>
               <div className="flex flex-wrap gap-3">
-                {product.colors.map((color) => (
+                {product.sizes.map((size) => (
                   <button
-                    key={color}
-                    onClick={() => setSelectedColor(color)}
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
                     className={`px-4 py-2 rounded-lg border-2 transition-all ${
-                      selectedColor === color
-                        ? 'border-primary-500 bg-primary-50 text-primary-700'
+                      selectedSize === size
+                        ? 'border-terracotta-500 bg-terracotta-50 text-terracotta-700'
                         : 'border-gray-300 hover:border-gray-400'
                     }`}
                   >
-                    {color}
+                    {size}&quot;
                   </button>
                 ))}
               </div>
@@ -131,22 +132,41 @@ export default function ProductDetailPage() {
             disabled={!product.inStock}
             className={`w-full py-4 rounded-lg font-semibold text-lg transition-all ${
               product.inStock
-                ? 'bg-primary-500 text-white hover:bg-primary-600 shadow-lg hover:shadow-xl'
+                ? 'bg-terracotta-500 text-white hover:bg-terracotta-600 shadow-lg hover:shadow-xl'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
             {addedToCart ? '✓ Added to Cart!' : 'Add to Cart'}
           </button>
 
-          <div className="mt-8 border-t pt-8">
-            <h3 className="font-semibold text-gray-900 mb-4">Product Features</h3>
-            <ul className="space-y-2 text-gray-700">
-              <li>• Long-lasting formula</li>
-              <li>• Cruelty-free and vegan</li>
-              <li>• Dermatologically tested</li>
-              <li>• Free from parabens and sulfates</li>
-            </ul>
-          </div>
+          {product.materials && product.materials.length > 0 && (
+            <div className="mt-8 border-t pt-8">
+              <h3 className="font-semibold text-gray-900 mb-4">Materials & Craftsmanship</h3>
+              <ul className="space-y-2 text-gray-700">
+                {product.materials.map((material, index) => (
+                  <li key={index}>• {material}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {product.careInstructions && product.careInstructions.length > 0 && (
+            <div className="mt-8 border-t pt-8">
+              <h3 className="font-semibold text-gray-900 mb-4">Care Instructions</h3>
+              <ul className="space-y-2 text-gray-700">
+                {product.careInstructions.map((instruction, index) => (
+                  <li key={index}>• {instruction}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {product.shippingInfo && (
+            <div className="mt-8 border-t pt-8">
+              <h3 className="font-semibold text-gray-900 mb-4">Shipping Information</h3>
+              <p className="text-gray-700">{product.shippingInfo}</p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -171,7 +191,7 @@ export default function ProductDetailPage() {
                   </div>
                   <div className="p-4">
                     <h3 className="font-semibold text-gray-900 mb-2">{relatedProduct.name}</h3>
-                    <p className="text-primary-600 font-bold">${relatedProduct.price.toFixed(2)}</p>
+                    <p className="text-terracotta-600 font-bold">${relatedProduct.price.toFixed(2)}</p>
                   </div>
                 </div>
               </div>
