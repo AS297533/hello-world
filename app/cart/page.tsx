@@ -13,12 +13,12 @@ export default function CartPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center py-16">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Your Cart is Empty</h1>
-          <p className="text-gray-600 mb-8">Add some beautiful lip products to get started!</p>
+          <p className="text-gray-600 mb-8">Add some beautiful Lippan Art pieces to get started!</p>
           <button
             onClick={() => router.push('/products')}
-            className="bg-primary-500 text-white px-8 py-3 rounded-lg hover:bg-primary-600 transition-colors"
+            className="bg-terracotta-500 text-white px-8 py-3 rounded-lg hover:bg-terracotta-600 transition-colors"
           >
-            Shop Now
+            Explore Collection
           </button>
         </div>
       </div>
@@ -33,7 +33,7 @@ export default function CartPage() {
         <div className="lg:col-span-2">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {cart.map((item) => (
-              <div key={`${item.id}-${item.selectedColor}`} className="flex gap-4 p-6 border-b last:border-b-0">
+              <div key={`${item.id}-${item.selectedSize || 'default'}`} className="flex gap-4 p-6 border-b last:border-b-0">
                 <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
                   <Image
                     src={item.image}
@@ -45,10 +45,10 @@ export default function CartPage() {
 
                 <div className="flex-grow">
                   <h3 className="font-semibold text-gray-900 mb-1">{item.name}</h3>
-                  {item.selectedColor && (
-                    <p className="text-sm text-gray-600 mb-2">Color: {item.selectedColor}</p>
+                  {item.selectedSize && (
+                    <p className="text-sm text-gray-600 mb-2">Size: {item.selectedSize}&quot;</p>
                   )}
-                  <p className="text-primary-600 font-bold">${item.price.toFixed(2)}</p>
+                  <p className="text-terracotta-600 font-bold">${item.price.toFixed(2)}</p>
                 </div>
 
                 <div className="flex flex-col items-end justify-between">
@@ -104,7 +104,7 @@ export default function CartPage() {
               </div>
               <div className="flex justify-between text-gray-600">
                 <span>Shipping</span>
-                <span>{getCartTotal() >= 50 ? 'FREE' : '$5.99'}</span>
+                <span>{getCartTotal() >= 100 ? 'FREE' : '$9.99'}</span>
               </div>
               <div className="flex justify-between text-gray-600">
                 <span>Tax</span>
@@ -113,20 +113,20 @@ export default function CartPage() {
               <div className="border-t pt-3 flex justify-between text-lg font-bold text-gray-900">
                 <span>Total</span>
                 <span>
-                  ${(getCartTotal() + (getCartTotal() >= 50 ? 0 : 5.99) + getCartTotal() * 0.08).toFixed(2)}
+                  ${(getCartTotal() + (getCartTotal() >= 100 ? 0 : 9.99) + getCartTotal() * 0.08).toFixed(2)}
                 </span>
               </div>
             </div>
 
-            {getCartTotal() < 50 && (
-              <p className="text-sm text-gray-600 mb-4 bg-primary-50 p-3 rounded">
-                Add ${(50 - getCartTotal()).toFixed(2)} more for free shipping!
+            {getCartTotal() < 100 && (
+              <p className="text-sm text-gray-600 mb-4 bg-beige-100 p-3 rounded">
+                Add ${(100 - getCartTotal()).toFixed(2)} more for free shipping!
               </p>
             )}
 
             <button
               onClick={() => router.push('/checkout')}
-              className="w-full bg-primary-500 text-white py-3 rounded-lg font-semibold hover:bg-primary-600 transition-colors mb-3"
+              className="w-full bg-terracotta-500 text-white py-3 rounded-lg font-semibold hover:bg-terracotta-600 transition-colors mb-3"
             >
               Proceed to Checkout
             </button>

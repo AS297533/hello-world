@@ -1,11 +1,11 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { CartItem, Product } from '@/types/product';
+import { CartItem, Product, ArtSize } from '@/types/product';
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: Product, selectedColor?: string) => void;
+  addToCart: (product: Product, selectedSize?: ArtSize) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -33,21 +33,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [cart, isLoaded]);
 
-  const addToCart = (product: Product, selectedColor?: string) => {
+  const addToCart = (product: Product, selectedSize?: ArtSize) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find(
-        (item) => item.id === product.id && item.selectedColor === selectedColor
+        (item) => item.id === product.id && item.selectedSize === selectedSize
       );
 
       if (existingItem) {
         return prevCart.map((item) =>
-          item.id === product.id && item.selectedColor === selectedColor
+          item.id === product.id && item.selectedSize === selectedSize
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
 
-      return [...prevCart, { ...product, quantity: 1, selectedColor }];
+      return [...prevCart, { ...product, quantity: 1, selectedSize }];
     });
   };
 

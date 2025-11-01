@@ -70,15 +70,15 @@ export default function CheckoutPage() {
           <p className="text-gray-600 mb-8">
             Thank you for your purchase. We&apos;ve sent a confirmation email to {formData.email}
           </p>
-          <div className="bg-primary-50 rounded-lg p-6 mb-8">
+          <div className="bg-beige-100 rounded-lg p-6 mb-8">
             <p className="text-sm text-gray-600 mb-2">Order Number</p>
-            <p className="text-2xl font-bold text-primary-600">
+            <p className="text-2xl font-bold text-terracotta-600">
               #{Math.random().toString(36).substr(2, 9).toUpperCase()}
             </p>
           </div>
           <button
             onClick={() => router.push('/products')}
-            className="bg-primary-500 text-white px-8 py-3 rounded-lg hover:bg-primary-600 transition-colors"
+            className="bg-terracotta-500 text-white px-8 py-3 rounded-lg hover:bg-terracotta-600 transition-colors"
           >
             Continue Shopping
           </button>
@@ -273,7 +273,7 @@ export default function CheckoutPage() {
               className={`w-full py-4 rounded-lg font-semibold text-lg transition-all ${
                 isProcessing
                   ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-primary-500 text-white hover:bg-primary-600 shadow-lg hover:shadow-xl'
+                  : 'bg-terracotta-500 text-white hover:bg-terracotta-600 shadow-lg hover:shadow-xl'
               }`}
             >
               {isProcessing ? 'Processing...' : 'Place Order'}
@@ -287,9 +287,9 @@ export default function CheckoutPage() {
 
             <div className="space-y-4 mb-6">
               {cart.map((item) => (
-                <div key={`${item.id}-${item.selectedColor}`} className="flex justify-between text-sm">
+                <div key={`${item.id}-${item.selectedSize || 'default'}`} className="flex justify-between text-sm">
                   <span className="text-gray-600">
-                    {item.name} {item.selectedColor && `(${item.selectedColor})`} x {item.quantity}
+                    {item.name} {item.selectedSize && `(${item.selectedSize}")`} x {item.quantity}
                   </span>
                   <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
                 </div>

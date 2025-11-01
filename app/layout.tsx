@@ -5,8 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "LipanArt - Premium Lip Art Products",
-  description: "Discover our collection of premium lipsticks, lip glosses, lip liners, and lip care products.",
+  title: "Lippan Art - Traditional Kutch Mirror Work Wall Hangings",
+  description: "Discover exquisite handcrafted Lippan Art wall hangings inspired by traditional Kutch mirror work. Premium home décor featuring clay, mirrors, and natural textures. Shop authentic Indian art for modern interiors.",
 };
 
 export default function RootLayout({
